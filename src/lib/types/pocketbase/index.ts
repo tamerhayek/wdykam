@@ -99,6 +99,7 @@ export type AnswersRecord = {
 	answer?: AnswersAnswerOptions;
 	created?: IsoDateString;
 	id: string;
+	is_correct?: boolean;
 	participant?: RecordIdString;
 	related_question?: RecordIdString;
 	updated?: IsoDateString;

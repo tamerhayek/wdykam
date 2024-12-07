@@ -20,9 +20,14 @@ export const PUT: RequestHandler = async ({ locals, request }) => {
 		});
 
 	try {
-		const record = await locals.pb
-			.collection(Collections.Answers)
-			.create({ participant: locals.participant.id, answer, related_question });
+		const questionData = await locals.pb.collection(Collections.Questions).getOne(related_question);
+
+		const record = await locals.pb.collection(Collections.Answers).create({
+			participant: locals.participant.id,
+			answer,
+			related_question,
+			is_correct: answer === questionData.correct_answer
+		});
 
 		return json({ success: true, id: record.id });
 	} catch (e) {
