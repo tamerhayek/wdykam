@@ -6,6 +6,7 @@
 	import '@fontsource/poppins/latin-700.css';
 	import '@fontsource/poppins/latin-800.css';
 	import type { Snippet } from 'svelte';
+	import { Toasts } from 'svoast';
 	import '../app.css';
 
 	interface Props {
@@ -20,5 +21,7 @@
 	<meta name="title" content="What do you know about me?" />
 	<meta name="description" content="What do you know about me?" />
 </svelte:head>
+
+<Toasts position="top-right" />
 
 {@render children()}

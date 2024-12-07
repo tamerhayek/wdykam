@@ -27,10 +27,10 @@
 			<ol class="flex flex-col gap-3">
 				{#each participants as { name, correct_answers }}
 					<li
-						class="relative flex items-center justify-between overflow-hidden rounded-xl border-2 border-teal-300 p-3"
+						class="relative flex items-center justify-between overflow-hidden rounded-xl border-2 border-indigo-300 p-3"
 					>
 						<div
-							class="absolute left-0 top-0 -z-10 h-full rounded-xl bg-teal-600"
+							class="absolute left-0 top-0 -z-10 h-full rounded-xl bg-indigo-600"
 							style="width: {(correct_answers / total_answers) * 100}%"
 						></div>
 						<span>{name}</span>
@@ -41,7 +41,7 @@
 		</div>
 		<div class="w-1/3 p-5">
 			<QRCode
-				data={env.PUBLIC_APP_URL}
+				data="{env.PUBLIC_APP_URL}/quiz"
 				shape="circle"
 				haveBackgroundRoundedEdges
 				haveGappedModules
