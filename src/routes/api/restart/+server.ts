@@ -1,4 +1,4 @@
-import { json } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ locals, cookies }) => {
@@ -9,5 +9,5 @@ export const GET: RequestHandler = async ({ locals, cookies }) => {
 
 	locals.participant = null;
 
-	return json({ success: true });
+	redirect(302, '/quiz');
 };

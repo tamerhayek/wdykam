@@ -20,7 +20,7 @@
 </script>
 
 <main class="flex min-h-screen flex-col items-center justify-between gap-5 p-10">
-	<h1>Cosa ne sai su di me?</h1>
+	<h1>Quante ne sai su di me?</h1>
 
 	<div class="flex w-full grow justify-between gap-5">
 		<div class="flex grow flex-col gap-5 p-5">
