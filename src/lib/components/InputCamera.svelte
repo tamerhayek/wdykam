@@ -15,10 +15,10 @@
 	<div class="py-3">
 		<label
 			for={id}
-			class="flex flex-col items-center gap-5 rounded-xl border-2 border-indigo-600 px-3 py-10"
+			class="flex cursor-pointer flex-col items-center gap-5 rounded-xl border-2 border-primary bg-base-200 px-3 py-10 hover:bg-base-300"
 		>
 			{label}
-			<Icon src={Camera} size="100px" />
+			<Icon src={Camera} size="150px" />
 		</label>
 		<input
 			{id}

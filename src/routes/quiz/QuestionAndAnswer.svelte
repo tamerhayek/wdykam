@@ -86,25 +86,25 @@
 		</div>
 	{:else}
 		<h2 class="text-2xl font-semibold">{question.text}</h2>
-		<div class="grid grid-cols-2 gap-3">
+		<div class="flex flex-col gap-3">
 			{#each question.answers as { text: answer, image, option }}
 				{#if answer}
 					<button
-						class="flex flex-col items-center justify-between gap-2 rounded-xl border-2 border-slate-50 bg-indigo-900 px-5 py-5 hover:bg-indigo-950"
-						onclick={() => {
-							handleSelect(option);
-						}}
+						onclick={() => handleSelect(option)}
+						class="flex items-center gap-2 overflow-hidden rounded-xl bg-primary shadow-xl"
 					>
 						{#if image}
-							<div class="overflow-hidden rounded-xl">
+							<figure class="shrink-0 p-3">
 								<img
-									class="max-h-28 max-w-28 object-cover object-center"
+									class="h-20 w-20 object-contain object-center"
 									src={getPocketbaseFileUrl(Collections.Questions, question.id, image)}
 									alt="Answer image {option}"
 								/>
-							</div>
+							</figure>
 						{/if}
-						<span class="text-lg font-semibold">{answer}</span>
+						<div class="w-full grow">
+							<p class="w-full text-start text-lg font-semibold text-primary-content">{answer}</p>
+						</div>
 					</button>
 				{/if}
 			{/each}

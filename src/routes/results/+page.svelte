@@ -18,14 +18,13 @@
 	let selectedAnswer = $state(0);
 </script>
 
-<main class="flex min-h-screen flex-col items-center gap-5 p-10">
-	<h1>Risultati</h1>
-
-	<div class="flex w-full items-center justify-center gap-5">
-		<a href="/" class="w-fit rounded-xl bg-indigo-900 px-4 py-3 hover:bg-indigo-950">Home</a>
-		<a href="/reviews" class="w-fit rounded-xl bg-indigo-900 px-4 py-3 hover:bg-indigo-950">
-			Recensioni
-		</a>
+<div class="flex min-h-screen flex-col items-center gap-10 p-5">
+	<div class="flex w-full items-center justify-between gap-5">
+		<h1>Risultati</h1>
+		<div class="flex items-center gap-5">
+			<a href="/" class="btn btn-primary w-fit">Home</a>
+			<a href="/reviews" class="btn btn-primary w-fit">Recensioni</a>
+		</div>
 	</div>
 
 	<div class="flex w-full gap-5">
@@ -94,7 +93,7 @@
 	<div class="flex w-full items-center justify-center gap-5">
 		{#if selectedAnswer > 0}
 			<button
-				class="w-fit rounded-xl bg-indigo-900 px-4 py-3 hover:bg-indigo-950"
+				class="btn btn-primary w-fit"
 				onclick={() => {
 					selectedAnswer = selectedAnswer === 0 ? questions.length - 1 : selectedAnswer - 1;
 				}}
@@ -104,7 +103,7 @@
 		{/if}
 		{#if selectedAnswer < questions.length - 1}
 			<button
-				class="w-fit rounded-xl bg-indigo-900 px-4 py-3 hover:bg-indigo-950"
+				class="btn btn-primary w-fit"
 				onclick={() => {
 					selectedAnswer = selectedAnswer === questions.length - 1 ? 0 : selectedAnswer + 1;
 				}}
@@ -113,4 +112,4 @@
 			</button>
 		{/if}
 	</div>
-</main>
+</div>

@@ -24,36 +24,53 @@
 		{#each question.answers as { text: answer, image, participants, isCorrect }, index}
 			{#if answer}
 				<div
-					class="flex flex-col items-center gap-2 rounded-xl border-2 border-slate-50 px-5 py-5"
-					class:bg-indigo-900={!isCorrect}
-					class:bg-green-900={isCorrect}
+					class="flex flex-col gap-3 overflow-hidden rounded-xl p-3 shadow-xl"
+					class:bg-error={!isCorrect}
+					class:bg-success={isCorrect}
 				>
-					{#if image}
-						<div class="overflow-hidden rounded-xl">
-							<img
-								class="max-h-28 max-w-28 object-cover object-center"
-								src={getPocketbaseFileUrl(Collections.Questions, question.id, image)}
-								alt="Answer image {index + 1}"
-							/>
+					<div class="flex items-center gap-2">
+						{#if image}
+							<figure class="shrink-0 p-3">
+								<img
+									class="h-20 w-20 max-w-20 object-contain object-center"
+									src={getPocketbaseFileUrl(Collections.Questions, question.id, image)}
+									alt="Answer image {index}"
+								/>
+							</figure>
+						{/if}
+						<div class="w-full grow">
+							<p
+								class="w-full text-start text-lg font-semibold"
+								class:text-error-content={!isCorrect}
+								class:text-success-content={isCorrect}
+							>
+								{answer}
+							</p>
+						</div>
+					</div>
+					{#if participants.length > 0}
+						<div class="flex flex-col gap-3 px-3">
+							<div class="avatar-group -space-x-6 rtl:space-x-reverse">
+								{#each participants as { id, name, avatar }}
+									<div class="avatar border">
+										<div class="w-12">
+											<img
+												src={getPocketbaseFileUrl(Collections.Participants, id, avatar)}
+												alt="Avatar {name}"
+											/>
+										</div>
+									</div>
+								{/each}
+							</div>
+							<p
+								class="text-sm font-semibold"
+								class:text-error-content={!isCorrect}
+								class:text-success-content={isCorrect}
+							>
+								{participants.map((participant) => participant.name).join(', ')}
+							</p>
 						</div>
 					{/if}
-					<span class="text-lg font-semibold">{answer}</span>
-					<div class="flex flex-wrap items-center justify-center gap-2">
-						{#each participants as { id, name, avatar }}
-							<div class="flex items-center gap-2 px-4 py-3">
-								<div class="flex items-center gap-2">
-									<div class="size-10 overflow-hidden rounded-full border-2 border-indigo-500">
-										<img
-											class="aspect-square max-w-10 object-cover object-center"
-											src={getPocketbaseFileUrl(Collections.Participants, id, avatar)}
-											alt="Avatar {name}"
-										/>
-									</div>
-								</div>
-								<span>{name}</span>
-							</div>
-						{/each}
-					</div>
 				</div>
 			{/if}
 		{/each}

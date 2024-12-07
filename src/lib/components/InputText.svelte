@@ -9,17 +9,9 @@
 	let { id, label, placeholder, value = $bindable() }: Props = $props();
 </script>
 
-<div class="flex w-full flex-col gap-2">
-	<div class="py-3">
-		<label for={id} class="mb-2 block text-base font-medium text-slate-300">
-			{label}
-		</label>
-		<input
-			type="text"
-			class="block w-full rounded-lg border-4 border-slate-300 bg-slate-50 p-2.5 text-sm text-slate-900 focus:border-indigo-500"
-			{id}
-			{placeholder}
-			bind:value
-		/>
+<label for={id} class="form-control w-full">
+	<div class="label">
+		<span class="label-text text-lg">{label}</span>
 	</div>
-</div>
+	<input type="text" class="input input-bordered w-full" {id} {placeholder} bind:value />
+</label>

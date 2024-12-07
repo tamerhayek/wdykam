@@ -1,8 +1,8 @@
 {
     "name": "What do you know about me?",
     "short_name": "WDYKAM",
-    "theme_color": "#E9950C",
-	"background_color": "#115e59",
+    "theme_color": "#151212",
+	"background_color": "#151212",
     "display": "standalone",
     "icons": [
         {

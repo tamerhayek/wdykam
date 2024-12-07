@@ -37,23 +37,29 @@
 	});
 </script>
 
-<main class="flex min-h-screen flex-col items-center justify-between gap-5 p-10">
-	<h1>Quante ne sai su di me?</h1>
+<div class="flex min-h-screen flex-col items-center justify-between gap-10 p-5">
+	<div class="flex w-full items-center justify-between gap-5">
+		<h1>Quante ne sai su di me?</h1>
+		<div class="flex items-center gap-5">
+			<a href="/results" class="btn btn-primary w-fit">Risultati</a>
+			<a href="/reviews" class="btn btn-primary w-fit">Recensioni</a>
+		</div>
+	</div>
 
-	<div class="flex w-full grow justify-between gap-5">
-		<div class="flex grow flex-col gap-5 p-5">
+	<div class="flex w-full grow justify-between gap-10">
+		<div class="flex grow flex-col gap-5">
 			<ol class="flex flex-col gap-3">
 				{#each results as { id, name, avatar, correct_answers }}
 					<li
-						class="relative flex items-center justify-between overflow-hidden rounded-xl border-2 border-indigo-300 p-3"
+						class="relative flex items-center justify-between overflow-hidden rounded-xl border-2 border-primary p-3"
 					>
 						<div
-							class="absolute left-0 top-0 -z-10 h-full rounded-xl bg-indigo-950"
+							class="absolute left-0 top-0 h-full rounded-lg bg-neutral"
 							style="width: {(correct_answers / totalQuestions) * 100}%"
 						></div>
-						<div class="flex items-center gap-2">
+						<div class="z-10 flex items-center gap-2">
 							<div class="flex items-center gap-2">
-								<div class="size-10 overflow-hidden rounded-full border-2 border-indigo-500">
+								<div class="size-10 overflow-hidden rounded-full border-2 border-neutral">
 									<img
 										class="aspect-square max-w-10 object-cover object-center"
 										src={getPocketbaseFileUrl(Collections.Participants, id, avatar)}
@@ -61,14 +67,14 @@
 									/>
 								</div>
 							</div>
-							<span>{name}</span>
+							<span class="text-lg font-semibold text-neutral-content">{name}</span>
 						</div>
-						<div>{correct_answers}</div>
+						<p class="z-10 text-lg font-semibold text-neutral-content">{correct_answers}</p>
 					</li>
 				{/each}
 			</ol>
 		</div>
-		<div class="flex w-1/3 flex-col items-center gap-5 p-5">
+		<div class="w-1/3">
 			<QRCode
 				data="{env.PUBLIC_APP_URL}/quiz"
 				shape="circle"
@@ -76,9 +82,6 @@
 				haveGappedModules
 				isResponsive
 			/>
-			<a class="w-fit rounded-xl bg-indigo-900 px-4 py-3 hover:bg-indigo-950" href="/results">
-				Risultati
-			</a>
 		</div>
 	</div>
-</main>
+</div>
