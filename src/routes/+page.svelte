@@ -51,10 +51,10 @@
 			<ol class="flex flex-col gap-3">
 				{#each results as { id, name, avatar, correct_answers }}
 					<li
-						class="relative flex items-center justify-between overflow-hidden rounded-xl border-2 border-primary p-3"
+						class="relative flex items-center justify-between overflow-hidden rounded-full border-2 border-primary px-4 py-3"
 					>
 						<div
-							class="absolute left-0 top-0 h-full rounded-lg bg-neutral"
+							class="absolute left-0 top-0 h-full rounded-full bg-neutral"
 							style="width: {(correct_answers / totalQuestions) * 100}%"
 						></div>
 						<div class="z-10 flex items-center gap-2">

@@ -24,6 +24,6 @@
 
 <Toasts position="top-right" />
 
-<main class="p-3">
+<main class="p-1">
 	{@render children()}
 </main>

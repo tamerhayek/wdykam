@@ -26,7 +26,7 @@
 			{#each reviews as review}
 				<li class="flex flex-col items-center gap-3 rounded-xl bg-base-300 p-5">
 					<div class="flex w-full items-start gap-5">
-						<div class="size-40 shrink-0 overflow-hidden rounded-xl border-2 border-primary">
+						<div class="size-40 shrink-0 overflow-hidden rounded-xl">
 							<img
 								class="h-40 w-40 object-cover object-center"
 								src={getPocketbaseFileUrl(

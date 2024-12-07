@@ -30,7 +30,7 @@
 
 			if (res.success) {
 				toast.removeAll();
-				toast.success('Partecipante creato con successo!');
+				toast.success('Recensione inviata con successo!');
 				review = '';
 				stars = 0;
 				invalidate(Collections.Reviews);
