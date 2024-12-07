@@ -41,30 +41,30 @@
 		<QuestionAndAnswer
 			question={{
 				id: questions[0].id,
-				text: questions[0].question
+				text: questions[0].question,
+				answers: [
+					{
+						text: questions[0].answer_one,
+						image: questions[0].image_one,
+						option: AnswersAnswerOptions.one
+					},
+					{
+						text: questions[0].answer_two,
+						image: questions[0].image_two,
+						option: AnswersAnswerOptions.two
+					},
+					{
+						text: questions[0].answer_three,
+						image: questions[0].image_three,
+						option: AnswersAnswerOptions.three
+					},
+					{
+						text: questions[0].answer_four,
+						image: questions[0].image_four,
+						option: AnswersAnswerOptions.four
+					}
+				]
 			}}
-			answers={[
-				{
-					text: questions[0].answer_one,
-					image: questions[0].image_one,
-					option: AnswersAnswerOptions.one
-				},
-				{
-					text: questions[0].answer_two,
-					image: questions[0].image_two,
-					option: AnswersAnswerOptions.two
-				},
-				{
-					text: questions[0].answer_three,
-					image: questions[0].image_three,
-					option: AnswersAnswerOptions.three
-				},
-				{
-					text: questions[0].answer_four,
-					image: questions[0].image_four,
-					option: AnswersAnswerOptions.four
-				}
-			]}
 		/>
 	{:else if !review}
 		<Review />

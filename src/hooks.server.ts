@@ -1,12 +1,12 @@
 import { env } from '$env/dynamic/private';
-import { Collections } from '$lib/types/pocketbase';
+import { Collections, type TypedPocketBase } from '$lib/types/pocketbase';
 import { type Handle } from '@sveltejs/kit';
 import { sequence } from '@sveltejs/kit/hooks';
 import PocketBase from 'pocketbase';
 
 const pocketbaseHandle: Handle = async ({ event, resolve }) => {
 	event.locals.participant = null;
-	event.locals.pb = new PocketBase(env.PB_INSTANCE_URL);
+	event.locals.pb = new PocketBase(env.PB_INSTANCE_URL) as TypedPocketBase;
 
 	const participantId = event.cookies.get('participant_id');
 	if (participantId) {

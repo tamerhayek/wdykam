@@ -1,9 +1,12 @@
 <script lang="ts">
+	import { invalidate } from '$app/navigation';
 	import { env } from '$env/dynamic/public';
-	import QRCode from '@castlenine/svelte-qrcode';
-	import type { PageData } from './$types';
 	import { getPocketbaseFileUrl } from '$lib/index';
-	import { Collections } from '$lib/types/pocketbase';
+	import { Collections, type TypedPocketBase } from '$lib/types/pocketbase';
+	import QRCode from '@castlenine/svelte-qrcode';
+	import PocketBase from 'pocketbase';
+	import { onMount } from 'svelte';
+	import type { PageData } from './$types';
 
 	interface Props {
 		data: PageData;
@@ -13,8 +16,24 @@
 
 	const { results, totalQuestions } = $derived(data);
 
-	$effect(() => {
-		console.log(results);
+	const realtimeSync = async (pb: TypedPocketBase) => {
+		await pb.collection(Collections.Answers).subscribe('*', (e) => {
+			console.log('answers updated', e);
+			invalidate(Collections.Answers);
+		});
+	};
+
+	const realtimeUnsync = async (pb: TypedPocketBase) => {
+		await pb.collection(Collections.Answers).unsubscribe();
+	};
+
+	onMount(() => {
+		const pb = new PocketBase(env.PUBLIC_PB_INSTANCE_URL) as TypedPocketBase;
+		realtimeSync(pb);
+
+		return () => {
+			realtimeUnsync(pb);
+		};
 	});
 </script>
 
@@ -29,7 +48,7 @@
 						class="relative flex items-center justify-between overflow-hidden rounded-xl border-2 border-indigo-300 p-3"
 					>
 						<div
-							class="absolute left-0 top-0 -z-10 h-full rounded-xl bg-indigo-600"
+							class="absolute left-0 top-0 -z-10 h-full rounded-xl bg-indigo-950"
 							style="width: {(correct_answers / totalQuestions) * 100}%"
 						></div>
 						<div class="flex items-center gap-2">
@@ -49,7 +68,7 @@
 				{/each}
 			</ol>
 		</div>
-		<div class="w-1/3 p-5">
+		<div class="flex w-1/3 flex-col items-center gap-5 p-5">
 			<QRCode
 				data="{env.PUBLIC_APP_URL}/quiz"
 				shape="circle"
@@ -57,6 +76,9 @@
 				haveGappedModules
 				isResponsive
 			/>
+			<a class="w-fit rounded-xl bg-indigo-900 px-4 py-3 hover:bg-indigo-950" href="/results">
+				Risultati
+			</a>
 		</div>
 	</div>
 </main>

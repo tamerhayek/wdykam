@@ -18,21 +18,23 @@ export const load = (async ({ locals, depends }) => {
 		const participants = [...new Set(answers.map((answer) => answer.participant))];
 
 		return {
-			results: participants.map((participant) => {
-				const participantData = answers.find((answer) => answer.participant === participant)!
-					.expand!.participant;
-				return {
-					id: participantData.id,
-					name: participantData.name,
-					avatar: participantData.avatar,
-					correct_answers: answers.reduce((acc, answer) => {
-						if (answer.participant === participant && answer.is_correct) {
-							return acc + 1;
-						}
-						return acc;
-					}, 0)
-				};
-			}),
+			results: participants
+				.map((participant) => {
+					const participantData = answers.find((answer) => answer.participant === participant)!
+						.expand!.participant;
+					return {
+						id: participantData.id,
+						name: participantData.name,
+						avatar: participantData.avatar,
+						correct_answers: answers.reduce((acc, answer) => {
+							if (answer.participant === participant && answer.is_correct) {
+								return acc + 1;
+							}
+							return acc;
+						}, 0)
+					};
+				})
+				.sort((a, b) => b.correct_answers - a.correct_answers),
 			totalQuestions: questions.totalItems
 		};
 	} catch (e) {

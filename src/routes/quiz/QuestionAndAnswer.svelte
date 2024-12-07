@@ -8,15 +8,15 @@
 		question: {
 			id: string;
 			text: string;
+			answers: {
+				text: string;
+				image: string;
+				option: AnswersAnswerOptions;
+			}[];
 		};
-		answers: {
-			text: string;
-			image: string;
-			option: AnswersAnswerOptions;
-		}[];
 	}
 
-	let { question, answers }: Props = $props();
+	let { question }: Props = $props();
 
 	let loading = $state(false);
 
@@ -87,7 +87,7 @@
 	{:else}
 		<h2 class="text-2xl font-semibold">{question.text}</h2>
 		<div class="grid grid-cols-2 gap-3">
-			{#each answers as { text: answer, image, option }}
+			{#each question.answers as { text: answer, image, option }}
 				{#if answer}
 					<button
 						class="flex flex-col items-center justify-between gap-2 rounded-xl border-2 border-slate-50 bg-indigo-900 px-5 py-5 hover:bg-indigo-950"
@@ -98,7 +98,7 @@
 						{#if image}
 							<div class="overflow-hidden rounded-xl">
 								<img
-									class="max-w-28 object-cover object-center"
+									class="max-h-28 max-w-28 object-cover object-center"
 									src={getPocketbaseFileUrl(Collections.Questions, question.id, image)}
 									alt="Answer image {option}"
 								/>
