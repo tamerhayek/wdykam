@@ -4,6 +4,7 @@
 	import type { PageData } from './$types';
 	import ChooseNameAndAvatar from './ChooseNameAndAvatar.svelte';
 	import QuestionAndAnswer from './QuestionAndAnswer.svelte';
+	import Review from './Review.svelte';
 
 	interface Props {
 		data: PageData;
@@ -11,7 +12,7 @@
 
 	let { data }: Props = $props();
 
-	const { participant, questions } = $derived(data);
+	const { participant, questions, review } = $derived(data);
 </script>
 
 <div class="flex min-h-screen w-full flex-col gap-5 p-3">
@@ -65,6 +66,8 @@
 				}
 			]}
 		/>
+	{:else if !review}
+		<Review />
 	{:else}
 		<h1 class="text-2xl font-semibold">Hai risposto tutte le domande!</h1>
 	{/if}
