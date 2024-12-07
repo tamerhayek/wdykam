@@ -1,0 +1,46 @@
+services:
+  wdykam-pocketbase:
+    container_name: wdykam-pocketbase
+    image: wdykam/pocketbase
+    build:
+      context: ./docker/pocketbase
+      dockerfile: ./Dockerfile
+      args:
+        - PB_APP_NAME=${PB_APP_NAME}
+        - PB_APP_URL=${PB_APP_URL}
+        - PB_ENCRYPTION_KEY=${PB_ENCRYPTION_KEY}
+        - PB_SMTP_ENABLED=${PB_SMTP_ENABLED}
+        - PB_SMTP_HOST=${PB_SMTP_HOST}
+        - PB_SMTP_PORT=${PB_SMTP_PORT}
+        - PB_SMTP_USERNAME=${PB_SMTP_USERNAME}
+        - PB_SMTP_PASSWORD=${PB_SMTP_PASSWORD}
+        - PB_SMTP_SENDER_NAME=${PB_SMTP_SENDER_NAME}
+        - PB_SMTP_SENDER_ADDRESS=${PB_SMTP_SENDER_ADDRESS}
+        - PB_S3_ENABLED=${PB_S3_ENABLED}
+        - PB_S3_ENDPOINT=${PB_S3_ENDPOINT}
+        - PB_S3_BUCKET=${PB_S3_BUCKET}
+        - PB_S3_REGION=${PB_S3_REGION}
+        - PB_S3_ACCESS_KEY=${PB_S3_ACCESS_KEY}
+        - PB_S3_SECRET_ACCESS_KEY=${PB_S3_SECRET_ACCESS_KEY}
+        - PB_S3_FORCE_PATH_STYLE=${PB_S3_FORCE_PATH_STYLE}
+        - PB_BACKUPS_CRON=${PB_BACKUPS_CRON}
+        - PB_BACKUPS_CRON_MAX_KEEP=${PB_BACKUPS_CRON_MAX_KEEP}
+        - PB_BACKUPS_S3_ENABLED=${PB_BACKUPS_S3_ENABLED}
+        - PB_BACKUPS_S3_ENDPOINT=${PB_BACKUPS_S3_ENDPOINT}
+        - PB_BACKUPS_S3_BUCKET=${PB_BACKUPS_S3_BUCKET}
+        - PB_BACKUPS_S3_REGION=${PB_BACKUPS_S3_REGION}
+        - PB_BACKUPS_S3_ACCESS_KEY=${PB_BACKUPS_S3_ACCESS_KEY}
+        - PB_BACKUPS_S3_SECRET_ACCESS_KEY=${PB_BACKUPS_S3_SECRET_ACCESS_KEY}
+        - PB_BACKUPS_S3_FORCE_PATH_STYLE=${PB_BACKUPS_S3_FORCE_PATH_STYLE}
+        - PB_LOGS_IP_ENABLED=${PB_LOGS_IP_ENABLED}
+        - PB_LOGS_MAX_DAYS=${PB_LOGS_MAX_DAYS}
+        - PB_LOGS_MIN_LEVEL=${PB_LOGS_MIN_LEVEL}
+        - PB_ADMIN_EMAIL=${PB_ADMIN_EMAIL}
+        - PB_ADMIN_PASSWORD=${PB_ADMIN_PASSWORD}
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    volumes:
+      - ./docker/pocketbase/pb_data:/pb/pb_data
+      - ./docker/pocketbase/pb_migrations:/pb/pb_migrations
+      - ./docker/pocketbase/pb_hooks:/pb/pb_hooks

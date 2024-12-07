@@ -41,6 +41,7 @@ export default ts.config(
 			'.env*',
 			'!.env.example',
 			'.gitignore',
+			'docker/'
 		]
 	}
 );

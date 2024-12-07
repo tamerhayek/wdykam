@@ -6,3 +6,4 @@ yarn.lock
 .husky
 static
 assets
+docker/pocketbase/pb_data
