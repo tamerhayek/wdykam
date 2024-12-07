@@ -1,8 +1,9 @@
 <script lang="ts">
 	import { getPocketbaseFileUrl } from '$lib/index';
-	import { Collections } from '$lib/types/pocketbase';
+	import { AnswersAnswerOptions, Collections } from '$lib/types/pocketbase';
 	import type { PageData } from './$types';
 	import ChooseNameAndAvatar from './ChooseNameAndAvatar.svelte';
+	import QuestionAndAnswer from './QuestionAndAnswer.svelte';
 
 	interface Props {
 		data: PageData;
@@ -10,7 +11,7 @@
 
 	let { data }: Props = $props();
 
-	const { participant } = $derived(data);
+	const { participant, questions } = $derived(data);
 </script>
 
 <div class="flex min-h-screen w-full flex-col gap-5 p-3">
@@ -35,5 +36,36 @@
 
 	{#if !participant}
 		<ChooseNameAndAvatar />
+	{:else if questions.length > 0}
+		<QuestionAndAnswer
+			question={{
+				id: questions[0].id,
+				text: questions[0].question
+			}}
+			answers={[
+				{
+					text: questions[0].answer_one,
+					image: questions[0].image_one,
+					option: AnswersAnswerOptions.one
+				},
+				{
+					text: questions[0].answer_two,
+					image: questions[0].image_two,
+					option: AnswersAnswerOptions.two
+				},
+				{
+					text: questions[0].answer_three,
+					image: questions[0].image_three,
+					option: AnswersAnswerOptions.three
+				},
+				{
+					text: questions[0].answer_four,
+					image: questions[0].image_four,
+					option: AnswersAnswerOptions.four
+				}
+			]}
+		/>
+	{:else}
+		<h1 class="text-2xl font-semibold">Hai risposto tutte le domande!</h1>
 	{/if}
 </div>

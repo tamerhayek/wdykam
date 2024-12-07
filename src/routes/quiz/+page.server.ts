@@ -1,4 +1,4 @@
-import { Collections } from '$lib/types/pocketbase';
+import { Collections, type AnswersResponse } from '$lib/types/pocketbase';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ locals, depends }) => {
@@ -6,17 +6,23 @@ export const load = (async ({ locals, depends }) => {
 	depends(Collections.Questions);
 	depends(Collections.Answers);
 
-	const questions = await locals.pb.collection(Collections.Questions).getFullList({
-		sort: 'index'
-	});
+	let answers: AnswersResponse[] = [];
+	if (locals.participant)
+		answers = await locals.pb.collection(Collections.Answers).getFullList({
+			filter: `participant = "${locals.participant.id}"`
+		});
 
-	const answers = await locals.pb.collection(Collections.Answers).getFullList({
-		sort: '-created'
+	const answeredQuestions = answers.map((answer) => answer.related_question);
+
+	const filter = answeredQuestions.map((id) => `id != "${id}"`).join(' && ');
+
+	const questions = await locals.pb.collection(Collections.Questions).getFullList({
+		sort: 'index',
+		filter
 	});
 
 	return {
 		participant: locals.participant,
-		questions,
-		answers
+		questions
 	};
 }) satisfies PageServerLoad;
