@@ -14,6 +14,7 @@ export enum Collections {
 	Answers = 'answers',
 	Participants = 'participants',
 	Questions = 'questions',
+	Reviews = 'reviews',
 	Users = 'users'
 }
 
@@ -129,7 +130,17 @@ export type QuestionsRecord = {
 	image_one?: string;
 	image_three?: string;
 	image_two?: string;
+	index?: number;
 	question?: string;
+	updated?: IsoDateString;
+};
+
+export type ReviewsRecord = {
+	created?: IsoDateString;
+	id: string;
+	participant?: RecordIdString;
+	review?: string;
+	stars?: number;
 	updated?: IsoDateString;
 };
 
@@ -161,6 +172,8 @@ export type ParticipantsResponse<Texpand = unknown> = Required<ParticipantsRecor
 	BaseSystemFields<Texpand>;
 export type QuestionsResponse<Texpand = unknown> = Required<QuestionsRecord> &
 	BaseSystemFields<Texpand>;
+export type ReviewsResponse<Texpand = unknown> = Required<ReviewsRecord> &
+	BaseSystemFields<Texpand>;
 export type UsersResponse<Texpand = unknown> = Required<UsersRecord> & AuthSystemFields<Texpand>;
 
 // Types containing all Records and Responses, useful for creating typing helper functions
@@ -174,6 +187,7 @@ export type CollectionRecords = {
 	answers: AnswersRecord;
 	participants: ParticipantsRecord;
 	questions: QuestionsRecord;
+	reviews: ReviewsRecord;
 	users: UsersRecord;
 };
 
@@ -186,6 +200,7 @@ export type CollectionResponses = {
 	answers: AnswersResponse;
 	participants: ParticipantsResponse;
 	questions: QuestionsResponse;
+	reviews: ReviewsResponse;
 	users: UsersResponse;
 };
 
@@ -201,5 +216,6 @@ export type TypedPocketBase = PocketBase & {
 	collection(idOrName: 'answers'): RecordService<AnswersResponse>;
 	collection(idOrName: 'participants'): RecordService<ParticipantsResponse>;
 	collection(idOrName: 'questions'): RecordService<QuestionsResponse>;
+	collection(idOrName: 'reviews'): RecordService<ReviewsResponse>;
 	collection(idOrName: 'users'): RecordService<UsersResponse>;
 };
