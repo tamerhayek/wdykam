@@ -68,6 +68,7 @@
 	{:else if !review}
 		<Review />
 	{:else}
-		<h1 class="text-2xl font-semibold">Hai risposto tutte le domande!</h1>
+		<h1 class="text-2xl font-bold">Hai risposto a tutte le domande!</h1>
+		<h2 class="text-lg font-semibold">Grazie per la tua partecipazione!</h2>
 	{/if}
 </div>
