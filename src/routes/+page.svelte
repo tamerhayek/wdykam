@@ -71,6 +71,8 @@
 						</div>
 						<p class="z-10 text-lg font-semibold text-neutral-content">{correct_answers}</p>
 					</li>
+				{:else}
+					<p>Ancora nessun partecipante!</p>
 				{/each}
 			</ol>
 		</div>
