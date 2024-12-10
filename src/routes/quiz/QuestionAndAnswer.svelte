@@ -94,7 +94,7 @@
 						class="flex items-center gap-2 overflow-hidden rounded-xl bg-primary shadow-xl"
 					>
 						{#if image}
-							<figure class="shrink-0 p-3">
+							<figure class="shrink-0 py-3 ps-3">
 								<img
 									class="h-20 w-20 object-contain object-center"
 									src={getPocketbaseFileUrl(Collections.Questions, question.id, image)}
@@ -103,7 +103,9 @@
 							</figure>
 						{/if}
 						<div class="w-full grow">
-							<p class="w-full text-start text-lg font-semibold text-primary-content">{answer}</p>
+							<p class="w-full py-3 ps-3 text-start text-lg font-semibold text-primary-content">
+								{answer}
+							</p>
 						</div>
 					</button>
 				{/if}
