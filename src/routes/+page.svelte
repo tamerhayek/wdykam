@@ -38,7 +38,7 @@
 </script>
 
 <div class="flex min-h-screen flex-col items-center justify-between gap-10 p-5">
-	<div class="flex w-full items-center justify-between gap-5">
+	<div class="flex w-full flex-wrap items-center justify-between gap-5">
 		<h1>Quante ne sai su di me?</h1>
 		<div class="flex items-center gap-5">
 			<a href="/results" class="btn btn-primary w-fit">Risultati</a>
@@ -46,10 +46,10 @@
 		</div>
 	</div>
 
-	<div class="flex w-full grow justify-between gap-10">
+	<div class="flex w-full grow flex-wrap justify-between gap-10">
 		<div class="flex grow flex-col gap-5">
 			<ol class="flex flex-col gap-3">
-				{#each results as { id, name, avatar, correct_answers }}
+				{#each results as { id, name, avatar, correct_answers } (id)}
 					<li
 						class="relative flex items-center justify-between overflow-hidden rounded-full border-2 border-primary px-4 py-3"
 					>
@@ -76,7 +76,7 @@
 				{/each}
 			</ol>
 		</div>
-		<div class="w-1/3">
+		<div class="w-full lg:w-1/3">
 			<QRCode
 				data="{env.PUBLIC_APP_URL}/quiz"
 				shape="circle"

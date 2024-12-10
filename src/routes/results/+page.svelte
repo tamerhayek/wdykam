@@ -19,7 +19,7 @@
 </script>
 
 <div class="flex min-h-screen flex-col gap-10 p-5">
-	<div class="flex w-full items-center justify-between gap-5">
+	<div class="flex w-full flex-wrap items-center justify-between gap-5">
 		<h1>Risultati</h1>
 		<div class="flex items-center gap-5">
 			<a href="/" class="btn btn-primary w-fit">Home</a>
