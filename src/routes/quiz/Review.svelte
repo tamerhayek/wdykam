@@ -16,6 +16,8 @@
 			return;
 		}
 
+		loading = true;
+
 		toast.attention('Invio recensione in corso...', {
 			infinite: true
 		});
@@ -44,6 +46,8 @@
 			toast.error('Qualcosa è andato storto!');
 			console.error(error);
 		}
+
+		loading = false;
 	};
 </script>
 
@@ -57,25 +61,22 @@
 		<h2 class="text-2xl font-semibold">Dimmi che ne pensi.</h2>
 
 		<div class="flex items-center gap-1.5">
-			<!-- 1st Star -->
-			<input onclick={() => (stars = 1)} type="radio" id="star1" name="stars" class="hidden" />
-			<label for="star1" class="cursor-pointer text-4xl" class:text-warning={stars >= 1}> ★ </label>
-
-			<!-- 2nd Star -->
-			<input onclick={() => (stars = 2)} type="radio" id="star2" name="stars" class="hidden" />
-			<label for="star2" class="cursor-pointer text-4xl" class:text-warning={stars >= 2}> ★ </label>
-
-			<!-- 3rd Star -->
-			<input onclick={() => (stars = 3)} type="radio" id="star3" name="stars" class="hidden" />
-			<label for="star3" class="cursor-pointer text-4xl" class:text-warning={stars >= 3}> ★ </label>
-
-			<!-- 4th Star -->
-			<input onclick={() => (stars = 4)} type="radio" id="star4" name="stars" class="hidden" />
-			<label for="star4" class="cursor-pointer text-4xl" class:text-warning={stars >= 4}> ★ </label>
-
-			<!-- 5th Star -->
-			<input onclick={() => (stars = 5)} type="radio" id="star5" name="stars" class="hidden" />
-			<label for="star5" class="cursor-pointer text-4xl" class:text-warning={stars >= 5}> ★ </label>
+			{#each [1, 2, 3, 4, 5] as star (star)}
+				<label
+					for="star{star}"
+					class="cursor-pointer text-4xl transition-colors duration-200 ease-in-out"
+					class:text-warning={stars >= star}
+				>
+					<input
+						onclick={() => (stars = star)}
+						type="radio"
+						id="star{star}"
+						name="stars"
+						class="hidden"
+					/>
+					★
+				</label>
+			{/each}
 		</div>
 
 		<InputTextArea

@@ -6,6 +6,7 @@
 	import QRCode from '@castlenine/svelte-qrcode';
 	import PocketBase from 'pocketbase';
 	import { onMount } from 'svelte';
+	import { flip } from 'svelte/animate';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -51,6 +52,7 @@
 			<ol class="flex flex-col gap-3">
 				{#each results as { id, name, avatar, correct_answers } (id)}
 					<li
+						animate:flip
 						class="relative flex items-center justify-between overflow-hidden rounded-full border-2 border-primary px-4 py-3"
 					>
 						<div

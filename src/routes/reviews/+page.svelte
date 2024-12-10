@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { getPocketbaseFileUrl } from '$lib/index';
 	import { Collections } from '$lib/types/pocketbase';
+	import { slide } from 'svelte/transition';
 	import type { PageData } from './$types';
 
 	interface Props {
@@ -24,8 +25,11 @@
 	{#if reviews.length > 0}
 		<div class="flex w-full gap-5">
 			<ol class="grid w-full grid-cols-1 gap-5 lg:grid-cols-2">
-				{#each reviews as review}
-					<li class="flex flex-col items-center gap-3 rounded-xl bg-base-300 p-5">
+				{#each reviews as review (review.id)}
+					<li
+						transition:slide|global
+						class="flex flex-col items-center gap-3 rounded-xl bg-base-300 p-5"
+					>
 						<div class="flex w-full items-start gap-5">
 							<div class="size-20 shrink-0 overflow-hidden rounded-xl lg:size-40">
 								<img
@@ -41,36 +45,14 @@
 							<div class="flex w-full grow flex-col gap-3">
 								<p class="text-xl font-semibold">{review.expand!.participant.name}</p>
 								<div class="flex items-center gap-1.5">
-									<span
-										class="cursor-pointer text-3xl lg:text-5xl"
-										class:text-warning={review.stars >= 1}
-									>
-										★
-									</span>
-									<span
-										class="cursor-pointer text-3xl lg:text-5xl"
-										class:text-warning={review.stars >= 2}
-									>
-										★
-									</span>
-									<span
-										class="cursor-pointer text-3xl lg:text-5xl"
-										class:text-warning={review.stars >= 3}
-									>
-										★
-									</span>
-									<span
-										class="cursor-pointer text-3xl lg:text-5xl"
-										class:text-warning={review.stars >= 4}
-									>
-										★
-									</span>
-									<span
-										class="cursor-pointer text-3xl lg:text-5xl"
-										class:text-warning={review.stars >= 5}
-									>
-										★
-									</span>
+									{#each [1, 2, 3, 4, 5] as star (star)}
+										<span
+											class="cursor-pointer text-3xl lg:text-5xl"
+											class:text-warning={review.stars >= star}
+										>
+											★
+										</span>
+									{/each}
 								</div>
 								<div class="w-full text-lg">{review.review}</div>
 							</div>

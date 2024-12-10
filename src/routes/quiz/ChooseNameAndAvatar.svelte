@@ -18,6 +18,8 @@
 			return;
 		}
 
+		loading = true;
+
 		toast.attention('Creazione partecipante in corso...', {
 			infinite: true
 		});
@@ -51,6 +53,8 @@
 			toast.error('Qualcosa è andato storto!');
 			console.error(error);
 		}
+
+		loading = false;
 	};
 </script>
 

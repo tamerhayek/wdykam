@@ -2,6 +2,7 @@
 	import { invalidate } from '$app/navigation';
 	import { getPocketbaseFileUrl } from '$lib/index';
 	import { AnswersAnswerOptions, Collections } from '$lib/types/pocketbase';
+	import { slide } from 'svelte/transition';
 	import { toast } from 'svoast';
 
 	interface Props {
@@ -85,11 +86,12 @@
 			<span class="sr-only">Loading...</span>
 		</div>
 	{:else}
-		<h2 class="text-2xl font-semibold">{question.text}</h2>
+		<h2 transition:slide class="text-2xl font-semibold">{question.text}</h2>
 		<div class="flex flex-col gap-3">
-			{#each question.answers as { text: answer, image, option }}
+			{#each question.answers as { text: answer, image, option } (option)}
 				{#if answer}
 					<button
+						transition:slide|global
 						onclick={() => handleSelect(option)}
 						class="flex items-center gap-2 overflow-hidden rounded-xl bg-primary shadow-xl"
 					>
